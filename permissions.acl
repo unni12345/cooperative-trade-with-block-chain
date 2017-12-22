@@ -1,0 +1,42 @@
+/**
+ * Access control rules for tutorial-network
+ */
+
+
+rule networkControlPermission {
+  description:  "networkControl can access network commands"
+ 
+  participant: "org.acme.biznet.eCommerceCompany"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.Network"
+  action: ALLOW  
+}
+
+rule ruleTrader {
+    description: "Description of the ACL rule"
+    participant: "org.acme.biznet.Trader"
+    operation: ALL
+    resource: "org.acme.biznet.Invoice"
+    action: ALLOW
+}
+
+rule ruleeCommerceCompany {
+  description: "Description of the ACL rule"
+    participant: "org.acme.biznet.eCommerceCompany"
+    operation: ALL
+    resource(v): "org.acme.biznet.Invoice"
+    condition: (v.loanStaus==0)
+    action: ALLOW
+
+
+}
+
+rule ruleBank{
+  description:"Rule for Bank"
+  participant: "org.acme.biznet.Bank"
+  operation:ALL
+  resource(v): "org.acme.biznet.Invoice"
+  condition: (v.loanStaus==1)
+  action: ALLOW
+}
+

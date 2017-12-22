@@ -1,0 +1,61 @@
+/**
+ * My commodity trading network
+ */
+namespace org.acme.biznet
+
+transaction loanRequest {
+    --> Invoice inVoice
+    o Double rate
+    o Double timePeriod
+ 
+}
+
+transaction productSold {
+  --> Invoice item
+}
+
+transaction productDelivered{
+  --> Invoice item
+}
+
+asset Product identified by uniqueID{
+  o String mainkind
+  o String brand
+  o String modelNo
+  o String uniqueID
+  o String date
+  o String warranty
+  o Double cost
+
+}
+
+asset Invoice identified by invoiceID{
+
+  o String invoiceID
+  o String eCompanyName
+  o String traderName
+  o String date
+  o Double interestRate
+  o Double timePeriod
+  o Double totalAmount
+  o Integer loanStatus default=0
+  -->Product[] items
+}
+
+participant Trader identified by traderID{
+
+  o String companyName
+  o String mailID
+  o String traderID
+
+}
+
+participant Bank identified by bankID{
+  o String bankName
+  o String bankID
+}
+
+participant eCommerceCompany identified by eCompanyID{
+  o String eCompanyID
+  o String eCompanyName
+}
